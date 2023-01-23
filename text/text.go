@@ -5,7 +5,7 @@ import (
 
 	"github.com/rockwell-uk/go-text/fonts"
 
-	geos "github.com/rockwell-uk/go-geos"
+	geos "github.com/twpayne/go-geos"
 )
 
 var (

@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"testing"
 
-	geos "github.com/rockwell-uk/go-geos"
+	geos "github.com/twpayne/go-geos"
 
 	"github.com/golang/freetype/truetype"
 	"github.com/llgcode/draw2d"

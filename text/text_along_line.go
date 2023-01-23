@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/rockwell-uk/go-text/fonts"
+	geos "github.com/twpayne/go-geos"
 
-	geos "github.com/rockwell-uk/go-geos"
+	"github.com/rockwell-uk/go-geom/geom"
+
+	"github.com/rockwell-uk/go-text/fonts"
 
 	"github.com/llgcode/draw2d/draw2dimg"
 )
@@ -44,10 +46,7 @@ func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf 
 
 func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]LetterPosition, *geos.Geom, error) {
 
-	lineCoords, err := GetMultiLineStringCoords(g)
-	if err != nil {
-		return []LetterPosition{}, &geos.Geom{}, err
-	}
+	lineCoords := *geom.GetPoints(g)
 	charMetrics := getCharMetrics(label, tf)
 
 	lineData := GetLineData(lineCoords)
@@ -201,18 +200,6 @@ func getCharMetrics(label string, tf fonts.TypeFace) []CharMetric {
 	}
 
 	return charMetrics
-}
-
-func GetMultiLineStringCoords(g *geos.Geom) ([][]float64, error) {
-
-	var res *[][]float64
-
-	res, err := g.GetPoints(g)
-	if err != nil {
-		return [][]float64{}, err
-	}
-
-	return *res, nil
 }
 
 // calculate the angle and distance travelled from the origin to each point along the line
