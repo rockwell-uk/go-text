@@ -5,7 +5,7 @@ import (
 	"image/color"
 	"math"
 
-	geos "github.com/rockwell-uk/go-geos"
+	geos "github.com/twpayne/go-geos"
 
 	"github.com/llgcode/draw2d/draw2dimg"
 	"github.com/rockwell-uk/go-geom/geom"

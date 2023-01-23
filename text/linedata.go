@@ -3,7 +3,7 @@ package text
 import (
 	"fmt"
 
-	geos "github.com/rockwell-uk/go-geos"
+	geos "github.com/twpayne/go-geos"
 )
 
 type LineData struct {
