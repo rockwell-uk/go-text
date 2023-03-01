@@ -10,4 +10,4 @@ require (
 	golang.org/x/image v0.3.0
 )
 
-require github.com/twpayne/go-geos v0.8.0
+require github.com/twpayne/go-geos v0.11.0
