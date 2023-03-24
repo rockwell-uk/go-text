@@ -4,13 +4,11 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/llgcode/draw2d/draw2dimg"
+	"github.com/rockwell-uk/go-geom/geom"
 	geos "github.com/twpayne/go-geos"
 
-	"github.com/rockwell-uk/go-geom/geom"
-
 	"github.com/rockwell-uk/go-text/fonts"
-
-	"github.com/llgcode/draw2d/draw2dimg"
 )
 
 type TextGlyph struct {
@@ -20,7 +18,6 @@ type TextGlyph struct {
 }
 
 func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf fonts.TypeFace) ([]TextGlyph, error) {
-
 	charpositions, _, err := GetLetterPositions(label, g, tf)
 	if err != nil {
 		return []TextGlyph{}, err
@@ -29,7 +26,6 @@ func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf 
 	textGlyphs := []TextGlyph{}
 
 	for i, c := range label {
-
 		x := charpositions[i].X
 		y := charpositions[i].Y
 		rotation := charpositions[i].Angle
@@ -45,7 +41,6 @@ func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf 
 }
 
 func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]LetterPosition, *geos.Geom, error) {
-
 	lineCoords := *geom.GetPoints(g)
 	charMetrics := getCharMetrics(label, tf)
 
@@ -56,7 +51,6 @@ func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]Letter
 	labelLength := len(label)
 
 	if numPositions < labelLength {
-
 		fm := fonts.GetFaceMetrics(tf)
 		wkt := g.ToWKT()
 
@@ -76,7 +70,6 @@ func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]Letter
 }
 
 func calculateLetterPositions(label string, charMetrics []CharMetric, lineData []LineData, lineCoords [][]float64, tf fonts.TypeFace) []LetterPosition {
-
 	var letterPositions []LetterPosition
 	var charIndex int         // index of the current character
 	var charsOnSegment int    // number of characters on the current segment
@@ -92,7 +85,6 @@ func calculateLetterPositions(label string, charMetrics []CharMetric, lineData [
 	nudge = 0
 
 	for s, line := range lineData {
-
 		// reset segment count
 		charsOnSegment = 0
 
@@ -106,7 +98,6 @@ func calculateLetterPositions(label string, charMetrics []CharMetric, lineData [
 		remainder = line.Length
 
 		for i := charIndex; i < len(label); i++ {
-
 			charMetric = charMetrics[charIndex]
 			charWidth := charMetric.Width
 
@@ -127,7 +118,6 @@ func calculateLetterPositions(label string, charMetrics []CharMetric, lineData [
 			}
 
 			if remainder > charWidth/2 {
-
 				letterPositions = append(letterPositions, LetterPosition{
 					Char:  charMetric.Char,
 					X:     positionX - offsetX,
@@ -153,13 +143,11 @@ func calculateLetterPositions(label string, charMetrics []CharMetric, lineData [
 }
 
 func letterPositionsToGeom(p []LetterPosition) (*geos.Geom, error) {
-
 	var r string
 
 	n := len(p)
 
 	switch n {
-
 	case 0:
 		r = "LINESTRING EMPTY"
 
@@ -175,7 +163,6 @@ func letterPositionsToGeom(p []LetterPosition) (*geos.Geom, error) {
 			}
 		}
 		r = fmt.Sprintf("%v)", r)
-
 	}
 
 	g, err := gctx.NewGeomFromWKT(r)
@@ -187,11 +174,9 @@ func letterPositionsToGeom(p []LetterPosition) (*geos.Geom, error) {
 }
 
 func getCharMetrics(label string, tf fonts.TypeFace) []CharMetric {
-
 	charMetrics := []CharMetric{}
 
 	for i, r := range label {
-
 		charMetrics = append(charMetrics, CharMetric{
 			Char:    string(label[i]),
 			Metrics: fonts.GetGlyphMetrics(tf, r),
@@ -203,15 +188,13 @@ func getCharMetrics(label string, tf fonts.TypeFace) []CharMetric {
 }
 
 // calculate the angle and distance travelled from the origin to each point along the line
-// also record the coordintaes of each point from the origin
+// also record the coordintaes of each point from the origin.
 func GetLineData(lineCoords [][]float64) MultiLineData {
-
 	var lineData MultiLineData
 	var prevPos []float64
 	var x, y float64
 
 	for key, pos := range lineCoords {
-
 		if key > 0 {
 			x = pos[0] - prevPos[0]
 			y = pos[1] - prevPos[1]

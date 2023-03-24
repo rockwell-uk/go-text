@@ -1,15 +1,15 @@
 linters:
   enable:
+  - asasalint
   - asciicheck
   - bidichk
   - bodyclose
   - containedctx
   - contextcheck
-  - deadcode
   - decorder
   - depguard
   - dogsled
-  - dupl
+  - dupword
   - durationcheck
   - errcheck
   - errchkjson
@@ -18,9 +18,13 @@ linters:
   - execinquery
   - exhaustive
   - exportloopref
+  - forbidigo
   - forcetypeassert
+  - gci
+  - gocheckcompilerdirectives
   - goconst
   - gocritic
+  - godot
   - goerr113
   - gofmt
   - goimports
@@ -32,34 +36,39 @@ linters:
   - grouper
   - importas
   - ineffassign
+  - interfacebloat
   - ireturn
+  - loggercheck
   - misspell
   - nakedret
   - nilerr
   - noctx
-  - nonamedreturns
+  - nolintlint
   - nosprintfhostport
   - prealloc
   - predeclared
+  - promlinter
+  - reassign
   - rowserrcheck
   - sqlclosecheck
   - staticcheck
-  - structcheck
   - tagliatelle
   - tenv
+  - testableexamples
   - thelper
   - typecheck
   - unconvert
   - unparam
   - unused
-  - varcheck
+  - usestdlibvars
   - wastedassign
+  - whitespace
   disable:
   - cyclop
-  - exhaustivestruct
+  - dupl
   - exhaustruct
   - funlen
-  - gci
+  - ginkgolinter
   - gochecknoglobals
   - gochecknoinits
   - gocognit
@@ -69,33 +78,29 @@ linters:
   - goheader
   - gomnd
   - gomoddirectives
-  - ifshort
   - lll
   - maintidx
   - makezero
   - nestif
   - nlreturn
-  - nlreturn
-  - nolintlint
+  - nonamedreturns
   - paralleltest
-  - promlinter
   - revive
-  - scopelint
+  - stylecheck
   - testpackage
   - tparallel
   - varnamelen
-  - whitespace
   - wrapcheck
   - wsl
 
 linters-settings:
+  gci:
+    sections:
+    - standard
+    - default
+    - prefix(go-text,github.com/rockwell-uk/go-text)
   goimports:
-    local-prefixes: github.com/rockwell-uk/go-text
-  gosec:
-    config:
-      G306: "0644"
-  errorlint:
-    errorf: false
+    local-prefixes: go-text,github.com/rockwell-uk/go-text
 
 issues:
   exclude-rules:

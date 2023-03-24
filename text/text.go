@@ -3,9 +3,9 @@ package text
 import (
 	"strings"
 
-	"github.com/rockwell-uk/go-text/fonts"
-
 	geos "github.com/twpayne/go-geos"
+
+	"github.com/rockwell-uk/go-text/fonts"
 )
 
 var (
@@ -13,7 +13,6 @@ var (
 )
 
 func SplitStringInTwo(s string, split func(string) bool) []string {
-
 	if !split(s) {
 		return []string{s}
 	}
@@ -64,7 +63,6 @@ func getFullHeight(gm fonts.GlyphMetrics) float64 {
 }
 
 func ShouldSplit(s string) bool {
-
 	// dont split short strings
 	if len(s) < 12 {
 		return false

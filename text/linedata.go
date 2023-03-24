@@ -19,7 +19,6 @@ func (d LineData) String() string {
 type MultiLineData []LineData
 
 func (ld MultiLineData) String() string {
-
 	var r string
 
 	for i, d := range ld {
@@ -30,7 +29,6 @@ func (ld MultiLineData) String() string {
 }
 
 func (ld MultiLineData) ToWKT(origin []float64) string {
-
 	var r string
 
 	n := len(ld)
@@ -46,7 +44,6 @@ func (ld MultiLineData) ToWKT(origin []float64) string {
 		r = fmt.Sprintf("%v%v %v,", r, x, y)
 
 		for i, p := range ld {
-
 			x += p.Pos[0]
 			y += p.Pos[1]
 			r = fmt.Sprintf("%v%v %v", r, x, y)
@@ -62,7 +59,6 @@ func (ld MultiLineData) ToWKT(origin []float64) string {
 }
 
 func (ld MultiLineData) ToGeom(origin []float64) (*geos.Geom, error) {
-
 	r := ld.ToWKT(origin)
 
 	g, err := gctx.NewGeomFromWKT(r)

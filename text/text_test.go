@@ -6,7 +6,6 @@ import (
 )
 
 func TestSplitStringInTwo(t *testing.T) {
-
 	tests := []struct {
 		input    string
 		expected []string
@@ -46,7 +45,6 @@ func TestSplitStringInTwo(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-
 		actual := SplitStringInTwo(tt.input, ShouldSplit)
 
 		if !reflect.DeepEqual(tt.expected, actual) {
