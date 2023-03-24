@@ -11,12 +11,11 @@ import (
 	"reflect"
 	"testing"
 
-	geos "github.com/twpayne/go-geos"
-
 	"github.com/golang/freetype/truetype"
 	"github.com/llgcode/draw2d"
 	"github.com/llgcode/draw2d/draw2dimg"
 	"github.com/rockwell-uk/go-geom/geom"
+	geos "github.com/twpayne/go-geos"
 
 	"github.com/rockwell-uk/go-text/fonts"
 	"github.com/rockwell-uk/go-text/fonts/ttf"
@@ -29,7 +28,6 @@ var (
 )
 
 func TestGetCharMetrics(t *testing.T) {
-
 	tests := map[string]struct {
 		wkt      string
 		label    string
@@ -54,7 +52,6 @@ func TestGetCharMetrics(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-
 		// Font
 		f, err := truetype.Parse(ttf.UniversBold)
 		if err != nil {
@@ -109,9 +106,8 @@ func TestGetCharMetrics(t *testing.T) {
 	}
 }
 
-// nolint:dupl
+//nolint:dupl
 func TestGetLetterPositions(t *testing.T) {
-
 	tests := map[string]struct {
 		wkt      string
 		label    string
@@ -214,7 +210,6 @@ func TestGetLetterPositions(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-
 		geom, err := gctx.NewGeomFromWKT(tt.wkt)
 		if err != nil {
 			t.Fatal(err)
@@ -273,7 +268,6 @@ func TestGetLetterPositions(t *testing.T) {
 }
 
 func TestLoveHeart(t *testing.T) {
-
 	tests := map[string]struct {
 		dim            int
 		fontData       draw2d.FontData
@@ -318,7 +312,6 @@ func TestLoveHeart(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-
 		tileWidth := float64(tt.dim)
 		tileHeight := float64(tt.dim)
 		centerX := tileWidth / 2
@@ -413,7 +406,6 @@ func TestLoveHeart(t *testing.T) {
 }
 
 func TestTestAlongLineOutlines(t *testing.T) {
-
 	tests := map[string]struct {
 		dim         int
 		fontData    draw2d.FontData
@@ -441,7 +433,6 @@ func TestTestAlongLineOutlines(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-
 		tileWidth := float64(tt.dim)
 		tileHeight := float64(tt.dim)
 		centerX := tileWidth / 2
@@ -547,7 +538,6 @@ func TestTestAlongLineOutlines(t *testing.T) {
 
 // https://developpaper.com/a-romantic-and-sad-love-story-cartesian-heart-line/
 func generateHeart(size float64) string {
-
 	// an array that holds the coordinates of all points
 	var p [][]float64
 
@@ -581,7 +571,6 @@ func generateHeart(size float64) string {
 }
 
 func toLineString(p [][]float64) string {
-
 	s := "LINESTRING("
 
 	for i, pt := range p {
@@ -596,7 +585,6 @@ func toLineString(p [][]float64) string {
 }
 
 func savePNG(fname string, m image.Image) error {
-
 	dir, _ := path.Split(fname)
 	err := os.MkdirAll(dir, os.ModePerm)
 	if err != nil {

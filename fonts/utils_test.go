@@ -12,7 +12,6 @@ import (
 )
 
 func TestGetTextWidth(t *testing.T) {
-
 	white := color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}
 	pink := color.RGBA{0xEC, 0x74, 0xB4, 0xFF}
 
@@ -34,7 +33,6 @@ func TestGetTextWidth(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-
 		// Font
 		f, err := truetype.Parse(ttf.ArialBold)
 		if err != nil {
@@ -78,9 +76,7 @@ func TestGetTextWidth(t *testing.T) {
 		actual := []float64{}
 
 		for i := 0; i < len(tt.label); i++ {
-
 			char := string(tt.label[i])
-
 			actual = append(actual, GetTextWidth(typeFace, char))
 		}
 

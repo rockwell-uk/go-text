@@ -10,7 +10,6 @@ import (
 	"github.com/llgcode/draw2d"
 	"github.com/llgcode/draw2d/draw2dimg"
 	"github.com/rockwell-uk/csync/mutex"
-
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 )
@@ -62,7 +61,6 @@ var (
 )
 
 func GetTextWidth(tf TypeFace, text string) float64 {
-
 	var w float64
 	for i, char := range text {
 		w += GetGlyphWidth(tf, char)
@@ -77,7 +75,6 @@ func GetTextWidth(tf TypeFace, text string) float64 {
 }
 
 func GetGlyphWidth(tf TypeFace, char rune) float64 {
-
 	b := GetGlyphMetrics(tf, char)
 	adv := b.Advance
 
@@ -85,7 +82,6 @@ func GetGlyphWidth(tf TypeFace, char rune) float64 {
 }
 
 func GetTextHeight(tf TypeFace, text string) (float64, float64) {
-
 	var maxAscent, maxDescent float64
 
 	for _, char := range text {
@@ -112,7 +108,6 @@ func GetTextHeight(tf TypeFace, text string) (float64, float64) {
 // these metrics are is at
 // https://developer.apple.com/library/archive/documentation/TextFonts/Conceptual/CocoaTextArchitecture/Art/glyphterms_2x.png
 func GetGlyphMetrics(tf TypeFace, char rune) GlyphMetrics {
-
 	cacheKey, ok := glyphCacheKey(tf, char)
 	if ok {
 		mutex.Lock()
@@ -140,7 +135,6 @@ func GetGlyphMetrics(tf TypeFace, char rune) GlyphMetrics {
 }
 
 func GetGlyphBounds(tf TypeFace, char rune) GlyphBounds {
-
 	cacheKey, ok := glyphCacheKey(tf, char)
 	if ok {
 		mutex.Lock()
@@ -173,7 +167,6 @@ func GetGlyphBounds(tf TypeFace, char rune) GlyphBounds {
 // Metrics holds the metrics for a Face. A visual depiction is at
 // https://developer.apple.com/library/mac/documentation/TextFonts/Conceptual/CocoaTextArchitecture/Art/glyph_metrics_2x.png
 func GetFaceMetrics(tf TypeFace) FaceMetrics {
-
 	cacheKey := fmt.Sprintf("%s.%v", tf.Name, tf.Size)
 	if cacheKey != "" {
 		mutex.Lock()
@@ -201,9 +194,8 @@ func GetFaceMetrics(tf TypeFace) FaceMetrics {
 	return fm
 }
 
-//https://github.com/fogleman/gg/blob/master/util.go
+// https://github.com/fogleman/gg/blob/master/util.go
 func unfix(x fixed.Int26_6) float64 {
-
 	const shift, mask = 6, 1<<6 - 1
 
 	if x >= 0 {
@@ -218,9 +210,8 @@ func unfix(x fixed.Int26_6) float64 {
 	return 0
 }
 
-// nolint:ireturn
+//nolint:ireturn,nolintlint
 func GetFace(gc *draw2dimg.GraphicContext, fontData draw2d.FontData, size float64) font.Face {
-
 	font, err := gc.FontCache.Load(fontData)
 	if err != nil {
 		panic(err)
@@ -235,7 +226,6 @@ func GetFace(gc *draw2dimg.GraphicContext, fontData draw2d.FontData, size float6
 }
 
 func SetFont(gc *draw2dimg.GraphicContext, typeFace TypeFace) {
-
 	font, err := gc.FontCache.Load(typeFace.FontData)
 	if err != nil {
 		panic(err)
@@ -254,7 +244,6 @@ func SetFont(gc *draw2dimg.GraphicContext, typeFace TypeFace) {
 }
 
 func glyphCacheKey(typeFace TypeFace, r rune) (string, bool) {
-
 	if typeFace.Name == "" {
 		return "", false
 	}
@@ -262,7 +251,6 @@ func glyphCacheKey(typeFace TypeFace, r rune) (string, bool) {
 	s := string(r)
 	if s == "" {
 		return "", false
-
 	}
 
 	return fmt.Sprintf("%s.%v.%s", typeFace.Name, typeFace.Size, string(r)), true

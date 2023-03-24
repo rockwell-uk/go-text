@@ -5,16 +5,14 @@ import (
 	"image/color"
 	"math"
 
-	geos "github.com/twpayne/go-geos"
-
 	"github.com/llgcode/draw2d/draw2dimg"
 	"github.com/rockwell-uk/go-geom/geom"
+	geos "github.com/twpayne/go-geos"
 
 	"github.com/rockwell-uk/go-text/fonts"
 )
 
 func DrawGlyphOutlines(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf fonts.TypeFace) error {
-
 	var (
 		black = color.RGBA{0x00, 0x00, 0x00, 0xFF}
 		white = color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}
@@ -32,9 +30,7 @@ func DrawGlyphOutlines(gc *draw2dimg.GraphicContext, label string, g *geos.Geom,
 	}
 
 	if len(letterpositions) >= len(label) {
-
 		for i, r := range label {
-
 			x := letterpositions[i].X
 			y := letterpositions[i].Y
 
@@ -72,7 +68,6 @@ func DrawGlyphOutlines(gc *draw2dimg.GraphicContext, label string, g *geos.Geom,
 }
 
 func rotateAroundPoint(x, y, originx, originy, radians float64) (float64, float64) {
-
 	rx := originx + (x-originx)*math.Cos(radians) - (y-originy)*math.Sin(radians)
 	ry := originy + (x-originx)*math.Sin(radians) + (y-originy)*math.Cos(radians)
 
