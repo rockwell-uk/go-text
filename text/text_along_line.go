@@ -5,8 +5,6 @@ import (
 	"math"
 
 	"github.com/llgcode/draw2d/draw2dimg"
-	"github.com/rockwell-uk/go-geom/geom"
-	geos "github.com/twpayne/go-geos"
 
 	"github.com/rockwell-uk/go-text/fonts"
 )
@@ -17,8 +15,8 @@ type TextGlyph struct {
 	Rotation float64
 }
 
-func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf fonts.TypeFace) ([]TextGlyph, error) {
-	charpositions, _, err := GetLetterPositions(label, g, tf)
+func TextAlongLine(gc *draw2dimg.GraphicContext, label string, lineCoords [][]float64, tf fonts.TypeFace) ([]TextGlyph, error) {
+	charpositions, err := GetLetterPositions(label, lineCoords, tf)
 	if err != nil {
 		return []TextGlyph{}, err
 	}
@@ -40,8 +38,7 @@ func TextAlongLine(gc *draw2dimg.GraphicContext, label string, g *geos.Geom, tf 
 	return textGlyphs, nil
 }
 
-func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]LetterPosition, *geos.Geom, error) {
-	lineCoords := *geom.GetPoints(g)
+func GetLetterPositions(label string, lineCoords [][]float64, tf fonts.TypeFace) ([]LetterPosition, error) {
 	charMetrics := getCharMetrics(label, tf)
 
 	lineData := GetLineData(lineCoords)
@@ -52,21 +49,11 @@ func GetLetterPositions(label string, g *geos.Geom, tf fonts.TypeFace) ([]Letter
 
 	if numPositions < labelLength {
 		fm := fonts.GetFaceMetrics(tf)
-		wkt := g.ToWKT()
-
-		lpGeom, err := letterPositionsToGeom(letterPositions)
-		if err != nil {
-			return letterPositions, lpGeom, err
-		}
-		return letterPositions, lpGeom, fmt.Errorf("[%v] the letters dont fit on the line [%v:%v] (%v:%v) %v", label, numPositions, labelLength, fm.Height, tf.Spacing, wkt)
+		return letterPositions,
+			fmt.Errorf("[%v] the letters dont fit on the line [%v:%v] (%v:%v)", label, numPositions, labelLength, fm.Height, tf.Spacing)
 	}
 
-	lpGeom, err := letterPositionsToGeom(letterPositions)
-	if err != nil {
-		return letterPositions, lpGeom, err
-	}
-
-	return letterPositions, lpGeom, nil
+	return letterPositions, nil
 }
 
 func calculateLetterPositions(label string, charMetrics []CharMetric, lineData []LineData, lineCoords [][]float64, tf fonts.TypeFace) []LetterPosition {
@@ -140,37 +127,6 @@ func calculateLetterPositions(label string, charMetrics []CharMetric, lineData [
 	}
 
 	return letterPositions
-}
-
-func letterPositionsToGeom(p []LetterPosition) (*geos.Geom, error) {
-	var r string
-
-	n := len(p)
-
-	switch n {
-	case 0:
-		r = "LINESTRING EMPTY"
-
-	case 1:
-		r = fmt.Sprintf("POINT (%v %v)", p[0].X, p[0].Y)
-
-	default:
-		r = "LINESTRING ("
-		for i, c := range p {
-			r = fmt.Sprintf("%v%v %v", r, c.X, c.Y)
-			if i < n-1 {
-				r = fmt.Sprintf("%v,", r)
-			}
-		}
-		r = fmt.Sprintf("%v)", r)
-	}
-
-	g, err := gctx.NewGeomFromWKT(r)
-	if err != nil {
-		return &geos.Geom{}, err
-	}
-
-	return g, nil
 }
 
 func getCharMetrics(label string, tf fonts.TypeFace) []CharMetric {

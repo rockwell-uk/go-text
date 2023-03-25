@@ -10,6 +10,5 @@ require (
 
 require (
 	github.com/rockwell-uk/csync v0.0.0-20230325001018-8af470f889c0
-	github.com/rockwell-uk/go-geom v0.0.0-20230324235322-275b64f774ac
-	github.com/twpayne/go-geos v0.13.1
+	github.com/rockwell-uk/go-draw v0.0.0-20230325135304-c206777b4d69
 )

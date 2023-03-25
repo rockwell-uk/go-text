@@ -3,13 +3,7 @@ package text
 import (
 	"strings"
 
-	geos "github.com/twpayne/go-geos"
-
 	"github.com/rockwell-uk/go-text/fonts"
-)
-
-var (
-	gctx = geos.NewContext()
 )
 
 func SplitStringInTwo(s string, split func(string) bool) []string {
