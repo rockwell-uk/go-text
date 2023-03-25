@@ -9,8 +9,8 @@ github.com/llgcode/ps v0.0.0-20150911083025-f1443b32eedb h1:61ndUreYSlWFeCY44JxD
 github.com/llgcode/ps v0.0.0-20150911083025-f1443b32eedb/go.mod h1:1l8ky+Ew27CMX29uG+a2hNOKpeNYEQjjtiALiBlFQbY=
 github.com/rockwell-uk/csync v0.0.0-20230325001018-8af470f889c0 h1:XZmncFdBZcVVVBocS/2E2SEWMDuFiSKZofeHKkxrrA8=
 github.com/rockwell-uk/csync v0.0.0-20230325001018-8af470f889c0/go.mod h1:3ccKeE7DZjuVCfox0qxipp2WsawKoHwvexz0Q81tuW8=
-github.com/rockwell-uk/go-draw v0.0.0-20230325135304-c206777b4d69 h1:sXI87yD6H0ihlhnBROiN9u5q30OT3KXLyDOyqj+HIUc=
-github.com/rockwell-uk/go-draw v0.0.0-20230325135304-c206777b4d69/go.mod h1:wIxz9Nnm3vdR589o6a1nbZkZNRuvSTOPGjyAvHP3tug=
+github.com/rockwell-uk/go-draw v0.0.0-20230325141703-c0f119431cc1 h1:qh8d91STyC5/g/cGCDN91ngl8PtSNNR8BMPcre1QAFo=
+github.com/rockwell-uk/go-draw v0.0.0-20230325141703-c0f119431cc1/go.mod h1:wIxz9Nnm3vdR589o6a1nbZkZNRuvSTOPGjyAvHP3tug=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
