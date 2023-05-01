@@ -7,5 +7,5 @@ require (
 	github.com/llgcode/draw2d v0.0.0-20210904075650-80aa0a2a901d
 	github.com/rockwell-uk/csync v1.0.0
 	github.com/rockwell-uk/go-draw v1.0.0
-	golang.org/x/image v0.6.0
+	golang.org/x/image v0.7.0
 )
