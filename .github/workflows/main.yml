@@ -49,7 +49,7 @@ jobs:
       with:
         go-version: stable
     - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
-    - uses: golangci/golangci-lint-action@08e2f20817b15149a52b5b3ebe7de50aff2ba8c5
+    - uses: golangci/golangci-lint-action@639cd343e1d3b897ff35927a75193d57cfcba299
       with:
         version: v1.52.1
         args: --timeout 3m
